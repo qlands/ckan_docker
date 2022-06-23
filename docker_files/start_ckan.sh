@@ -1,0 +1,1 @@
+gunicorn -D --timeout=1200 --capture-output --proxy-protocol --forwarded-allow-ips "*" --pid /opt/gunicorn/ckan.pid --log-file /opt/log/error_log --worker-class gevent --bind 0.0.0.0:5000 wsgi:application

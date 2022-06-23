@@ -1,0 +1,32 @@
+version: '3.7'
+services:
+  ckan020905:
+    image: qlands/ckan:020905
+    container_name: ckan020905
+    environment:
+      - ckan_user=ckan_cabi
+      - ckan_database=ckan_cabi
+      - ckan_password=ckan_cabi
+      - ckan_admin=admin
+      - ckan_admin_name=admin
+      - ckan_admin_email=cquiros@qlands.com
+      - ckan_admin_password=12345678
+      - ckan_site_url=http://localhost:5000
+    volumes:
+      - /opt/ckan/postgresql:/var/lib/postgresql/12/main
+      - /opt/ckan/solr:/var/lib/solr/data
+      - /opt/ckan/config:/opt/ckan/config
+      - /opt/ckan/storage:/opt/ckan/storage
+      - /opt/ckan/plugins:/opt/ckan/plugins
+      - /opt/ckan/log:/opt/log
+    ports:
+      - 5000:5000
+    networks:
+      ckannet:
+        ipv4_address: 192.169.1.1
+networks:
+  ckannet:
+     ipam:
+        driver: default
+        config:
+          - subnet: 192.169.0.0/16
